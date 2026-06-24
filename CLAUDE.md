@@ -136,32 +136,50 @@ fps to 10. Static thumbnails (PNG/JPG) were resized with `sips` (macOS).
 
 ## 🚀 Deployment (this repo)
 
-This working copy lives in the git repo **`kaiwenh-homepage`** (remote
-`git@github.com:Kaiwen-Hong/kaiwenh-homepage.git`, SSH auth works). It is being
-deployed as a **GitHub user site** at the apex URL **`https://kaiwen-hong.github.io`**.
+The repo on GitHub is **`Kaiwen-Hong/kaiwen-hong.github.io`** (already renamed from the
+original `kaiwenh-homepage`; local remote is updated to the new SSH URL). It deploys as
+a **GitHub user site** at the apex URL **`https://kaiwen-hong.github.io`**.
 
 `_config.yml` is set for that: `url: https://kaiwen-hong.github.io`, `baseurl: ""`
 (root). Because it's a user site at root, the absolute asset paths (`/tn/images/...`,
 `/style.css`) resolve correctly — no baseurl rewriting needed.
 
-**Required steps to go live (user site name must match):**
-1. On GitHub, **rename the repo** `kaiwenh-homepage` → **`kaiwen-hong.github.io`**
-   (Settings → General → Repository name). GitHub keeps redirects, so the existing
-   local remote keeps working after the rename.
-2. Update the local remote to the new name (or rely on the redirect):
-   `git -C <repo> remote set-url origin git@github.com:Kaiwen-Hong/kaiwen-hong.github.io.git`
-3. Settings → Pages → Source = "Deploy from a branch", branch = `main` (root) → Save.
-4. ~1 min later it's live at `https://kaiwen-hong.github.io`.
+### Build method: GitHub Actions with Jekyll 4.3 (NOT "Deploy from a branch")
 
-⚠️ Do **not** enable Pages before the rename — under the old project name it would serve
-at `/kaiwenh-homepage/` and the root-absolute asset paths would 404.
+Deployment runs via **`.github/workflows/deploy.yml`**, which builds with our own
+**Jekyll 4.3** (`ruby/setup-ruby` + our `Gemfile`) and publishes with
+`upload-pages-artifact` + `deploy-pages`.
 
-**Build env note:** `Gemfile` / `Gemfile.lock` are intentionally **gitignored** (see
-`.gitignore`). GitHub Pages' classic builder uses its own pinned `github-pages`
-(Jekyll 3.x) environment; committing our local `jekyll ~> 4.3` Gemfile could conflict
-with it. The site uses only Jekyll-3-compatible Liquid + the whitelisted
-`jekyll-sitemap` plugin, so the classic builder renders it fine. The Gemfile still
-exists locally (uncommitted) for `bundle exec jekyll serve`.
+**Why not the default "Deploy from a branch" builder?** It uses GitHub's classic
+`github-pages` gem = **Jekyll 3.10**, and the build *failed* there. Root cause: on
+Jekyll 3.x, `output: false` collection documents are still **rendered through their
+layout** (`layout: post` → `default.html`), and that rendering errored. Jekyll 4.3
+(what we build/preview with locally) does **not** render `output:false` docs, so the
+same site builds cleanly. Pinning Jekyll 4.3 via Actions sidesteps the whole 3.x /
+default-theme / default-plugins surface.
+
+Because of this, **`Gemfile` is now committed** (removed from `.gitignore`) — the
+workflow needs it. `Gemfile.lock` stays gitignored (the local lock is Ruby-4.0-pinned;
+the runner resolves fresh on Ruby 3.3).
+
+**One-time setup the user must do on GitHub:** Settings → Pages → **Source = "GitHub
+Actions"** (instead of "Deploy from a branch"). The workflow's `configure-pages`
+step tries to flip this automatically (`enablement: true`), but confirm it in the UI.
+After that, every push to `main` rebuilds and redeploys; status is in the repo's
+**Actions** tab (workflow "Deploy Jekyll site to Pages").
+
+### Inspecting build status without `gh`/token (public repo)
+
+The repo is public, so GitHub Actions results are queryable unauthenticated — handy
+when a deploy silently 404s:
+```bash
+REPO=Kaiwen-Hong/kaiwen-hong.github.io
+curl -s "https://api.github.com/repos/$REPO/actions/runs?per_page=5" \
+  | grep -E '"name"|"status"|"conclusion"|"html_url"'        # latest run + pass/fail
+# error detail for a failed classic build lives in the commit's check-run annotations:
+curl -s "https://api.github.com/repos/$REPO/commits/<sha>/check-runs"   # find failed id
+curl -s "https://api.github.com/repos/$REPO/check-runs/<id>/annotations"
+```
 
 ## ⚠️ Still TODO
 
@@ -211,7 +229,9 @@ tn/images/              # the thumbnails the site actually renders (src = /tn/im
 images/                 # only profile.jpg + favicon.ico (full-size figures not needed)
 pdfs/cv.pdf             # the CV the bio links to (copy of Kaiwen_resume_2026.pdf)
 style.scss + _sass/     # styling — rarely touched
-Gemfile / Gemfile.lock  # local `bundle exec jekyll serve` (gitignored — see Deployment)
+Gemfile                 # jekyll 4.3 — used by BOTH local serve and the Actions build
+                        #   (committed; Gemfile.lock stays gitignored)
+.github/workflows/deploy.yml  # builds Jekyll 4.3 and deploys to Pages (see Deployment)
 _make_thumbnails.sh     # original helper (not used by the GIF pipeline above)
 ```
 
