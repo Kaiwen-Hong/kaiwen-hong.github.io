@@ -162,11 +162,12 @@ Because of this, **`Gemfile` is now committed** (removed from `.gitignore`) — 
 workflow needs it. `Gemfile.lock` stays gitignored (the local lock is Ruby-4.0-pinned;
 the runner resolves fresh on Ruby 3.3).
 
-**One-time setup the user must do on GitHub:** Settings → Pages → **Source = "GitHub
-Actions"** (instead of "Deploy from a branch"). The workflow's `configure-pages`
-step tries to flip this automatically (`enablement: true`), but confirm it in the UI.
-After that, every push to `main` rebuilds and redeploys; status is in the repo's
-**Actions** tab (workflow "Deploy Jekyll site to Pages").
+**Status: LIVE.** The `configure-pages` step (`enablement: true`) auto-switched the
+Pages source to GitHub Actions, the "Deploy Jekyll site to Pages" workflow went green,
+and the site is serving correctly at https://kaiwen-hong.github.io (verified: 11 papers,
+all assets 200). Every push to `main` now rebuilds and redeploys; status is in the
+repo's **Actions** tab. The old red "pages build and deployment" runs are the disabled
+classic 3.10 builder and can be ignored.
 
 ### Inspecting build status without `gh`/token (public repo)
 

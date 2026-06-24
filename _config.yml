@@ -41,8 +41,8 @@ collections:
 plugins:
   - jekyll-sitemap
 exclude:
-  - preview.html
   - Gemfile
   - Gemfile.lock
   - LICENSE
   - README.md
+  - CLAUDE.md
