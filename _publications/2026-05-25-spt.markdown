@@ -1,0 +1,14 @@
+---
+layout: post
+title: "Self-Labeled Preference Transfer: Bootstrapping Steerable Robot Manipulation on Unlabeled Tasks"
+date: 2026-05-25 00:00:00 +00:00
+image: /images/spt.gif
+categories: research
+selected: true
+authors: "<strong>Kaiwen Hong</strong>, Shaoting Peng*, Xiangyu Zeng*, Pengcheng Wang*, Boyuan Tian, Haonan Chen, Yifan Zhu, Yixiao Wang, Katherine Rose Driggs-Campbell<br><em style='font-size:0.88em; color:#666;'>* Equal contribution</em>"
+venue: "Under review"
+arxiv:     # TODO: real link when available
+website:
+code:
+---
+Self-Labeled Preference Transfer (SPT) is a two-stage VLA that co-trains a preference-conditioned action head and a preference-recognition head, then self-labels unlabeled target demonstrations to transfer preference-following to new tasks &mdash; reaching 96.4% recognition accuracy and +25.4% preference-following over a naive VLA baseline in both simulation and real-world tasks.

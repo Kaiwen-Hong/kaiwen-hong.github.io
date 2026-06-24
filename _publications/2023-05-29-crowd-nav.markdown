@@ -1,0 +1,15 @@
+---
+layout: post
+title: "Intention-Aware Robot Crowd Navigation with Attention-Based Interaction Graph"
+date: 2023-05-29 00:00:00 +00:00
+image: /images/crowd-nav.png
+categories: research
+selected: true
+authors: "Shuijing Liu, Peixin Chang, Zhe Huang, Neeloy Chakraborty, <strong>Kaiwen Hong</strong>, Weihang Liang, D. Livingston McPherson, Junyi Geng, Katherine Driggs-Campbell"
+venue: "IEEE International Conference on Robotics and Automation (ICRA)"
+award: "Best Poster Award, IROS 2023 Last-Mile Robotics Workshop"
+arxiv:     # TODO: real link — resume marks [website] but lists no URL
+website: https://sites.google.com/view/intention-aware-crowdnav/home
+code:
+---
+An attention-based interaction graph for intention-aware robot crowd navigation, deployed on a TurtleBot 2i, that reasons over heterogeneous agent interactions for socially compliant navigation in crowds.

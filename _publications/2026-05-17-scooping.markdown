@@ -1,0 +1,14 @@
+---
+layout: post
+title: "Sim-and-Real Co-Training of Graph Neural Dynamics for Long-Horizon Scooping"
+date: 2026-05-17 00:00:00 +00:00
+image: /images/scooping.gif
+categories: research
+selected: true
+authors: "<strong>Kaiwen Hong</strong>, Haonan Chen*, Jiaming Xu*, Runxuan Wang*, Kaylan Wang, Mingtong Zhang, Shuijing Liu, Yifan Zhu, Yunzhu Li, Katherine Driggs-Campbell<br><em style='font-size:0.88em; color:#666;'>* Equal contribution</em>"
+venue: "IEEE International Conference on Robotics and Automation (ICRA)"
+arxiv:     # TODO: real link — resume marks [website] but lists no URL
+website: https://scoopthemall.github.io/
+code:
+---
+A sim-and-real co-training framework pairing a graph-based world model with Monte-Carlo tree search for long-horizon granular scooping, with perception from multiview calibrated RGB-D point clouds &mdash; enabling sample-efficient manipulation of granular material on a real robot.

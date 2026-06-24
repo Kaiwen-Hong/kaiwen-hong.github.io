@@ -1,0 +1,172 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+  <!-- Optional: add your own Google Analytics ID here later -->
+  <title>{{ site.name }}</title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+  <meta name="author" content="{{ site.name }}" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css" />
+  <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+  <style>
+    .pub-toggle { float: right; margin-top: 0.95em; font-size: 0.8em; color: #aaa; }
+    .pub-toggle a { text-decoration: none; color: #1772d0; }
+    .pub-toggle a:hover { text-decoration: underline; }
+    .pub-toggle a.pub-tab-active { color: #222; font-weight: 700; text-decoration: none; cursor: default; }
+    .pub-toggle .sep { color: #ddd; margin: 0 0.4em; }
+    tr.pub td { transition: background-color 0.12s ease-in-out; }
+    tr.pub:hover td { background-color: #f2f5fa; }
+    tr.pub td:first-child { border-top-left-radius: 8px; border-bottom-left-radius: 8px; }
+    tr.pub td:last-child  { border-top-right-radius: 8px; border-bottom-right-radius: 8px; }
+    ul li { margin-bottom: 0.3em; }
+    .pub-thumb { display: block; max-width: 100%; max-height: 120px; width: auto; height: auto; margin: 0 auto; border-radius: 4px; }
+  </style>
+</head>
+
+<body>
+  <table style="width:100%;max-width:800px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+    <tr style="padding:0px">
+      <td style="padding:0px">
+
+        <!-- ============ HEADER + BIO ============ -->
+        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+          <tr style="padding:0px">
+            <td style="padding:2.5%;width:60%;vertical-align:middle">
+              <h1>Kaiwen Hong</h1>
+              <p>
+                I am a Ph.D. candidate at the
+                <a href="https://illinois.edu/">University of Illinois Urbana-Champaign</a>, advised by
+                <a href="https://krdc.web.illinois.edu/">Prof. Katherine Driggs-Campbell</a>. My research interest is to
+                make real-world robot systems more <strong>adaptable, deployable, and steerable</strong>.
+              </p>
+              <p>
+                I currently work on diffusion VLM research at <a href="https://waymo.com/">Waymo</a>. I also spent time at
+                a Humanoid Stealth company, <a href="https://www.amazon.science/research-areas/robotics">Amazon Robotics</a>,
+                and <a href="https://www.xpeng.com/">XPENG</a> US.
+              </p>
+              <p style="text-align:center">
+                <a target="_blank" href="mailto:kaiwen2@illinois.edu">Email</a> &nbsp;/&nbsp;
+                <a href="https://scholar.google.com/citations?user=pwvOhvUAAAAJ">Google Scholar</a> &nbsp;/&nbsp;
+                <a href="pdfs/cv.pdf">CV</a> &nbsp;/&nbsp;
+                <a href="https://www.linkedin.com/in/kaiwen-hong-524520141/">LinkedIn</a>
+              </p>
+            </td>
+            <td style="padding:2.5%;width:40%;max-width:40%">
+              <img style="width:80%;max-width:80%;display:block;margin:0 auto;" alt="profile photo" src="{{ site.avatar }}">
+            </td>
+          </tr>
+        </table>
+
+        <!-- ============ PUBLICATIONS HEADER + TOGGLE ============ -->
+        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+          <tr>
+            <td style="padding:2.5%;width:100%;vertical-align:middle">
+              <h2 style="display:inline; margin:0;">Publications</h2>
+              <span class="pub-toggle">show: <a href="#" id="pub-selected-btn">selected</a><span class="sep">/</span><a href="#" id="pub-all-btn">by date</a></span>
+            </td>
+          </tr>
+        </table>
+
+        <!-- ============ PUBLICATIONS LIST ============ -->
+        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+          {% assign pubs = site.publications | sort: 'date' | reverse %}
+          {% for post in pubs %}
+          <tr class="pub{% if post.selected %} pub-selected{% endif %}">
+            <td style="padding:2.5%;width:25%;vertical-align:middle;min-width:120px">
+              {% assign ext = post.image | split: '.' | last | downcase %}
+              {% if ext == 'mp4' %}
+              <video class="pub-thumb" src="/tn{{post.image}}" poster="/tn{{ post.image | replace: '.mp4', '-poster.jpg' }}" autoplay loop muted playsinline preload="auto"></video>
+              {% else %}
+              <img class="pub-thumb" src="/tn{{post.image}}" alt="project image" />
+              {% endif %}
+            </td>
+            <td style="padding:2.5%;width:75%;vertical-align:middle">
+              <h3>{{post.title}}</h3>
+              <br>
+              {{post.authors}}
+              <br>
+              <em>{{post.venue}}</em>, {{ post.date | date: "%Y" }}
+              {% if post.award %}<br><span style="color:#c0392b;font-weight:bold;">{{post.award}}</span>{% endif %}
+              <br>
+              {% if post.website %}<a href="{{post.website}}">website</a> / {% endif %}
+              {% if post.arxiv %}<a href="{{post.arxiv}}">arxiv</a> / {% endif %}
+              {% if post.paper %}<a href="{{post.paper}}">paper</a> / {% endif %}
+              {% if post.code %}<a href="{{post.code}}">code</a> / {% endif %}
+              {% if post.video %}<a href="{{post.video}}">video</a> / {% endif %}
+              {% if post.poster %}<a href="{{post.poster}}">poster</a> / {% endif %}
+              {% if post.slides %}<a href="{{post.slides}}">slides</a> / {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </table>
+
+        <script>
+          (function () {
+            var selBtn = document.getElementById('pub-selected-btn');
+            var allBtn = document.getElementById('pub-all-btn');
+            var rows = Array.prototype.slice.call(document.querySelectorAll('tr.pub'));
+            if (!selBtn || !allBtn) { return; }
+            function playVid(v) { if (!v) { return; } var p = v.play(); if (p && p.catch) { p.catch(function () {}); } }
+            function show(mode) {
+              rows.forEach(function (r) {
+                var keep = (mode === 'all') || r.classList.contains('pub-selected');
+                r.style.display = keep ? '' : 'none';
+                var v = r.querySelector('video');
+                if (v) { if (keep) { playVid(v); } else { v.pause(); } }
+              });
+              selBtn.classList.toggle('pub-tab-active', mode === 'selected');
+              allBtn.classList.toggle('pub-tab-active', mode === 'all');
+            }
+            selBtn.addEventListener('click', function (e) { e.preventDefault(); show('selected'); });
+            allBtn.addEventListener('click', function (e) { e.preventDefault(); show('all'); });
+            show('selected');
+
+            // Some browsers ignore <video autoplay>; explicitly play when scrolled into view, pause when out.
+            if ('IntersectionObserver' in window) {
+              var io = new IntersectionObserver(function (entries) {
+                entries.forEach(function (e) { if (e.isIntersecting) { playVid(e.target); } else { e.target.pause(); } });
+              }, { threshold: 0.25 });
+              Array.prototype.forEach.call(document.querySelectorAll('video.pub-thumb'), function (v) { io.observe(v); });
+            }
+          })();
+        </script>
+
+        <br><br>
+
+        <!-- ============ AWARDS ============ -->
+        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+          <tr>
+            <td style="padding:2.5%;width:100%;vertical-align:middle">
+              <h2>Awards</h2>
+              <ul>
+                <li>Best Paper / Best Student Paper Award Finalist &mdash; <strong>CoRL 2023</strong></li>
+                <li>Best Conference Paper Finalist &mdash; <strong>ICRA 2025</strong></li>
+                <li>Best Paper in Human-Robot Interaction &mdash; <strong>ICRA 2025</strong></li>
+                <li>Best Paper Award &mdash; <strong>CVPR 2026</strong> Sense of Space Workshop</li>
+                <li>Best Paper Award &mdash; <strong>ICRA 2025</strong> Workshop on Advances in Social Navigation</li>
+                <li>Best Poster Award &mdash; <strong>IROS 2023</strong> Last-Mile Robotics Workshop</li>
+                <li>Second Prize &mdash; RoboMaster International Region Competition (ZJU-UIUC Team), 2019</li>
+              </ul>
+            </td>
+          </tr>
+        </table>
+
+        <!-- ============ FOOTER (please keep Jon Barron credit) ============ -->
+        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+          <tr>
+            <td style="padding:0px">
+              <br>
+              <p style="text-align:center;font-size:small;">
+                Design and source code from <a style="font-size:small;" href="https://jonbarron.info">Jon Barron's website</a>
+              </p>
+            </td>
+          </tr>
+        </table>
+
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

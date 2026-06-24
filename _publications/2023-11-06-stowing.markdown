@@ -1,0 +1,15 @@
+---
+layout: post
+title: "Predicting Object Interactions with Behavior Primitives: An Application in Stowing Tasks"
+date: 2023-11-06 00:00:00 +00:00
+image: /images/stowing.gif
+categories: research
+selected: true
+authors: "Haonan Chen, Yilong Niu*, <strong>Kaiwen Hong*</strong>, Shuijing Liu, Yiqing Wang, Yunzhu Li, Katherine Driggs-Campbell<br><em style='font-size:0.88em; color:#666;'>* Equal contribution</em>"
+venue: "Conference on Robot Learning (CoRL)"
+award: "Oral &middot; Best Paper / Best Student Paper Award Finalist, CoRL 2023"
+arxiv:     # TODO: real link — resume marks [website] but lists no URL
+website: https://haonan16.github.io/stow_page/
+code:
+---
+We combine GNN-based interaction prediction with primitive-augmented trajectory optimization to predict object interactions for stowing, achieving 95% real-world success from a single demonstration (3&ndash;4 keyframes) on multiview RGB-D point clouds.

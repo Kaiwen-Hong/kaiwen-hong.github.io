@@ -1,0 +1,15 @@
+---
+layout: post
+title: "HEIGHT: Heterogeneous Interaction Graph Transformer for Robot Navigation in Crowded and Constrained Environments"
+date: 2025-09-01 00:00:00 +00:00
+image: /images/height.gif
+categories: research
+selected: true
+authors: "Shuijing Liu, Haochen Xia, Fatemeh Cheraghi Pouria, <strong>Kaiwen Hong</strong>, Neeloy Chakraborty, Zichao Hu, Joydeep Biswas, Katherine Driggs-Campbell"
+venue: "IEEE Transactions on Automation Science and Engineering (T-ASE)"
+award: "Best Paper Award, ICRA 2025 Workshop on Advances in Social Navigation"
+arxiv:     # TODO: real link — resume marks [website] but lists no URL
+website: https://sites.google.com/view/crowdnav-height/home
+code:
+---
+HEIGHT is a heterogeneous interaction graph transformer for robot navigation in crowded and constrained environments, fusing spatio-temporal agent interactions with strong zero-shot generalization across scenarios.

@@ -1,0 +1,48 @@
+#
+# Site configuration. Edit the values below.
+#
+
+# Name shown in the browser tab / page title
+name: Kaiwen Hong
+
+# Profile photo (drop your photo into images/ and update this path)
+avatar: images/profile.jpg
+
+# Footer icons. Fill in usernames; leave blank to hide an icon.
+footer-links:
+  email: kaiwen2@illinois.edu
+  github: Kaiwen-Hong
+  linkedin: kaiwen-hong
+  twitter:                           # optional
+  instagram:                         # optional
+  rss:
+
+# Optional: Disqus comments / Google Analytics
+disqus:
+google_analytics:
+
+# Your site URL. User-site deploy: repo named kaiwen-hong.github.io serves at the apex below.
+url: "https://kaiwen-hong.github.io"
+baseurl: ""   # root deploy (user site). If you ever switch to a project page, set "/<repo-name>".
+
+# ---- you don't need to touch anything below ----
+permalink: /
+version: v1.2.0
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: 'highlight'
+sass:
+  style: :compressed
+collections:
+  publications:
+    output: false      # papers in _publications/ are list data, not standalone pages
+plugins:
+  - jekyll-sitemap
+exclude:
+  - preview.html
+  - Gemfile
+  - Gemfile.lock
+  - LICENSE
+  - README.md
