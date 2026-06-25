@@ -11,11 +11,11 @@
   <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
   <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
   <style>
-    .pub-toggle { float: right; margin-top: 0.95em; font-size: 0.8em; color: #aaa; }
-    .pub-toggle a { text-decoration: none; color: #1772d0; }
-    .pub-toggle a:hover { text-decoration: underline; }
-    .pub-toggle a.pub-tab-active { color: #222; font-weight: 700; text-decoration: none; cursor: default; }
-    .pub-toggle .sep { color: #ddd; margin: 0 0.4em; }
+    .pub-toggle { float: right; margin-top: 0.55em; display: inline-flex; border-radius: 999px; overflow: hidden; background: #f0f0f0; font-size: 0.72em; }
+    .pub-toggle a { text-decoration: none; color: #777; padding: 4px 14px; cursor: pointer; }
+    .pub-toggle a:hover { color: #333; }
+    .pub-toggle a.pub-tab-active { background: #2c2c2c; color: #fff; border-radius: 999px; }
+    .pub-toggle a.pub-tab-active:hover { color: #fff; cursor: default; }
     tr.pub td { transition: background-color 0.12s ease-in-out; }
     tr.pub:hover td { background-color: #f2f5fa; }
     tr.pub td:first-child { border-top-left-radius: 8px; border-bottom-left-radius: 8px; }
@@ -64,7 +64,7 @@
           <tr>
             <td style="padding:2.5%;width:100%;vertical-align:middle">
               <h2 style="display:inline; margin:0;">Publications</h2>
-              <span class="pub-toggle">show: <a href="#" id="pub-selected-btn">selected</a><span class="sep">/</span><a href="#" id="pub-all-btn">by date</a></span>
+              <span class="pub-toggle"><a href="#" id="pub-selected-btn">Selected</a><a href="#" id="pub-all-btn">By date</a></span>
             </td>
           </tr>
         </table>
