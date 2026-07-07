@@ -17,10 +17,13 @@ Prof. Katherine Driggs-Campbell). It is a **Jekyll** site, forked from
 [`leonidk/leonidk.github.io`](https://github.com/leonidk/leonidk.github.io),
 itself a Jekyll port of [Jon Barron's website](https://jonbarron.info/).
 
-Visual style is intentionally **minimal**: a single-column table layout with a bio
-header and a list of papers (thumbnail + title + authors + venue + award + links).
-No JS framework. The only JS is a small inline `<script>` in `_layouts/default.html`
-for the Publications "selected / by date" toggle.
+Visual style (redesigned 2026-07, user picked "modern cards" from a 3-way mockup):
+**Inter font, light-grey background (`#f6f8fa`), white rounded publication cards**
+with hover lift, award badges (red pills, split from `award:` on `<br>`), pill-shaped
+link chips under the bio, and a segmented Selected/By-date control. Layout is
+semantic divs + flexbox (the old Barron table layout is gone); all styling lives in
+`style.scss`. No JS framework. The only JS is a small inline `<script>` in
+`_layouts/default.html` for the Publications "Selected / By date" toggle.
 
 Source of truth for content is Kaiwen's **2026 resume**:
 `/Users/kaiwenhong/Desktop/interview/homepage/Kaiwen_resume_2026.pdf`
@@ -73,34 +76,19 @@ The `date:` in front-matter is the only sort key. To reorder, change the date in
 filename **and** the `date:` field. The `2026-05-*` dates are deliberately fabricated
 ordering keys for in-submission work, not real publication dates.
 
-## ⏳ In progress — Publications "selected / by date" toggle redesign
+## ✅ Resolved — full homepage redesign (2026-07, includes the toggle)
 
-This is the **active task**. The user has said the toggle is "too ugly" three times.
-Current live markup (in `_layouts/default.html`, the `.pub-toggle` span around line 67):
-`show: <a>selected</a> / <a>by date</a>` with blue links — still rejected.
-
-To resolve it, a comparison page **`toggle-preview.html`** (repo root, served at
-`http://127.0.0.1:4000/toggle-preview.html`) renders **6 candidate styles** in the
-real site font for the user to pick by number:
-
-1. underline tabs (red accent, matches award red) — *recommended*
-2. filled dark pill
-3. soft light pill
-4. minimal slash (blue link)
-5. letterspaced caps (`SELECTED / BY DATE`) — *recommended alt*
-6. quiet single link (`show all ▾`)
-
-**Next step:** once the user picks a number, implement that style by replacing the
-`.pub-toggle` / `.sep` CSS (around lines 14–18) and the toggle `<span>` HTML
-(around line 67) in `_layouts/default.html`, then **delete `toggle-preview.html`**
-(it's a throwaway mockup, not part of the site). The toggle JS logic itself
-(`show('selected')` / `show('all')`, the `pub-selected` class) stays — only the
-button markup/CSS changes. The active button uses class `pub-tab-active`.
+The long-running "toggle is too ugly" saga ended inside a bigger redesign: a 3-way
+full-page mockup (`style-preview.html`, since deleted) was rendered with real content
+— 1. refined minimal / 2. modern cards / 3. warm serif — and the user picked
+**2 (modern cards)**, now live. The toggle became a **segmented control** (`.seg`,
+grey track + white active pill, active class still `pub-tab-active`). If future
+visual tweaks are wanted, the same mockup-page-then-pick workflow is the way to go.
 
 ## How the toggle works (so you don't break it)
 
 - Each post can set `selected: true` in front-matter. The layout adds class
-  `pub-selected` to those `<tr>`s.
+  `pub-selected` to those `.pub` card divs (the JS queries `.pub`, not `tr.pub`).
 - The inline `<script>` defaults to showing only selected papers (`show('selected')`),
   and "by date" reveals all. This is the haonan16.github.io-style behavior the user asked for.
 - ⚠️ **Dormant code:** the layout still has an `{% if ext == 'mp4' %}<video>` branch
@@ -188,12 +176,10 @@ curl -s "https://api.github.com/repos/$REPO/check-runs/<id>/annotations"
    (still in submission). Add when available.
 2. **arxiv / code links** — most posts only have a project `website:`; `arxiv:` and
    `code:` are blank placeholders. Fill in as papers go public.
-3. **Toggle redesign** — the "selected / by date" toggle style is still pending a user
-   pick (see the in-progress section above); current style is functional but unloved.
-4. *(optional)* **GitHub link in bio** — username is now known (`Kaiwen-Hong`, set in
+3. *(optional)* **GitHub link in bio** — username is now known (`Kaiwen-Hong`, set in
    `_config.yml` footer-links). The bio's links row (Email / Scholar / CV / LinkedIn)
    does not yet include a GitHub link; add one to `_layouts/default.html` if wanted.
-5. *(optional)* **Favicon** — root `favicon.ico` is the template's generic icon and is
+4. *(optional)* **Favicon** — root `favicon.ico` is the template's generic icon and is
    gitignored (not deployed). Replace + un-ignore if you want a custom favicon.
 
 ## Local preview (working setup)
@@ -229,15 +215,15 @@ _publications/*.markdown # one paper per file; a collection (output:false) — l
 tn/images/              # the thumbnails the site actually renders (src = /tn/images/<name>)
 images/                 # only profile.jpg + favicon.ico (full-size figures not needed)
 pdfs/cv.pdf             # the CV the bio links to (copy of Kaiwen_resume_2026.pdf)
-style.scss + _sass/     # styling — rarely touched
+style.scss + _sass/     # ALL the styling for the modern-cards theme (rewritten 2026-07)
 Gemfile                 # jekyll 4.3 — used by BOTH local serve and the Actions build
                         #   (committed; Gemfile.lock stays gitignored)
 .github/workflows/deploy.yml  # builds Jekyll 4.3 and deploys to Pages (see Deployment)
 _make_thumbnails.sh     # original helper (not used by the GIF pipeline above)
 ```
 
-(The `toggle-preview.html` mockup is **not** in this repo — it lives only in the sibling
-working dir `../kaiwen-homepage`. The toggle-style pick is still pending; see above.)
+(Mockup preview pages — `toggle-preview.html`, `style-preview.html` — were throwaways
+and have been deleted; the redesign they led to is live. See the ✅ Resolved section.)
 
 ### Why a collection (and not `_posts/`)
 
