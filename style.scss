@@ -2,104 +2,226 @@
 ---
 
 //
-// IMPORTS
+// Modern-cards theme (方案 2) — Inter + light grey bg + white cards
 //
 
-//@import "reset";
-//@import "variables";
-// Syntax highlighting @import is at the bottom of this file
+* { box-sizing: border-box; }
 
-/**************/
-/* BASE RULES */
-/**************/
+body {
+  margin: 0;
+  background: #f6f8fa;
+  color: #1f2430;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.62;
+}
+
 a {
-  color: #1772d0;
+  color: #2456e6;
   text-decoration: none;
+  font-weight: 500;
 }
 
 a:focus,
 a:hover {
-  color: #f09228;
+  color: #163db1;
   text-decoration: none;
 }
 
-body,
-td,
-th,
-tr,
-p,
-a {
-  font-family: 'Lato', Verdana, Helvetica, sans-serif;
-  font-size: 14px;
-  font-display: auto;
+.page {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 44px 20px 40px;
 }
 
-strong {
-  font-family: 'Lato', Verdana, Helvetica, sans-serif;
-  font-size: 14px;
-  font-display: auto;
+/* ---------- header / bio ---------- */
+.hd {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 10px 4px 6px;
+}
+
+.hd .txt { flex: 1 1 400px; }
+
+h1 {
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  margin: 0 0 14px;
+  color: #0d1220;
+}
+
+.hd p {
+  margin: 0 0 12px;
+  color: #3c4257;
+  font-size: 15.5px;
+}
+
+.portrait {
+  width: 205px;
+  max-width: 60vw;
+  border-radius: 18px;
+  display: block;
+  box-shadow: 0 10px 30px rgba(13, 18, 32, .14);
+  flex: 0 0 auto;
+}
+
+.chips {
+  display: flex;
+  gap: 9px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+}
+
+.chips a {
+  border: 1px solid #d7dde8;
+  border-radius: 999px;
+  padding: 6px 15px;
+  font-size: 13.5px;
+  color: #29303d;
+  background: #fff;
+}
+
+.chips a:hover {
+  border-color: #2456e6;
+  color: #2456e6;
+}
+
+/* ---------- section headers ---------- */
+.sec {
+  margin: 46px 0 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 h2 {
-  font-family: 'Lato', Verdana, Helvetica, sans-serif;
-  font-size: 22px;
-  font-display: auto;
-  font-weight: normal;
-  padding: 0px;
-  margin: 0px;
-  display:inline; 
-}
-
-h3 {
-  font-family: 'Lato', Verdana, Helvetica, sans-serif;
-  font-size: 14px;
+  font-size: 23px;
   font-weight: 700;
-  font-display: auto;
-  padding: 0px;
-  margin: 0px;
-  display:inline; 
+  letter-spacing: -0.015em;
+  margin: 0;
+  color: #0d1220;
 }
 
-h1 {
-  font-family: 'Lato', Verdana, Helvetica, sans-serif;
-  font-size: 32px;
-  font-weight: normal;
-  font-display: auto;
+/* ---------- selected / by-date segmented control ---------- */
+.seg {
+  display: inline-flex;
+  background: #e8ecf2;
+  border-radius: 10px;
+  padding: 3px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.seg a {
+  padding: 5px 14px;
+  border-radius: 8px;
+  color: #5a6372;
+}
+
+.seg a:hover { color: #0d1220; }
+
+.seg a.pub-tab-active {
+  background: #fff;
+  color: #0d1220;
+  box-shadow: 0 1px 4px rgba(13, 18, 32, .12);
+  cursor: default;
+}
+
+/* ---------- publication cards ---------- */
+.pub {
+  background: #fff;
+  border: 1px solid #e5e9f0;
+  border-radius: 16px;
+  padding: 18px;
+  display: flex;
+  gap: 22px;
+  align-items: center;
+  margin-bottom: 16px;
+  transition: box-shadow .15s, transform .15s, border-color .15s;
+  flex-wrap: wrap;
+}
+
+.pub:hover {
+  box-shadow: 0 10px 28px rgba(13, 18, 32, .09);
+  transform: translateY(-2px);
+  border-color: #d2d9e5;
+}
+
+.pub-thumb {
+  width: 172px;
+  height: auto;
+  border-radius: 10px;
+  display: block;
+  flex: 0 0 auto;
+}
+
+.pub .meta { flex: 1 1 400px; }
+
+.pub h3 {
+  font-size: 16.5px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0 0 7px;
+  color: #0d1220;
+  line-height: 1.4;
+}
+
+.pub .au {
+  color: #3c4257;
+  font-size: 14px;
+  margin: 0 0 4px;
+}
+
+.pub .vn {
+  color: #6a7383;
+  font-size: 13.5px;
+}
+
+.badges {
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+  margin: 8px 0 0;
+}
+
+.badge {
+  background: #fdecea;
+  color: #b3261e;
+  font-size: 12.3px;
+  font-weight: 600;
+  border-radius: 7px;
+  padding: 3px 9px;
+}
+
+.pub .lk {
+  margin-top: 9px;
+  font-size: 13.5px;
+}
+
+.pub .lk a { margin-right: 14px; }
+
+/* ---------- awards ---------- */
+.awards {
+  margin: 12px 0 0;
+  padding-left: 20px;
+}
+
+.awards li {
+  margin-bottom: 7px;
+  color: #3c4257;
+}
+
+/* ---------- footer ---------- */
+.credit {
   text-align: center;
-  padding: 0px;
-  margin-block-start: 14px;
-  margin-block-end: 14px;
-  margin-left: 0px;
-  margin-right: 0px;
-
+  font-size: 13px;
+  color: #8a92a2;
+  margin-top: 48px;
 }
 
-.one {
-  width: 160px;
-  height: 160px;
-  position: relative;
-}
-
-.two {
-  width: 160px;
-  height: 160px;
-  position: absolute;
-  transition: opacity .2s ease-in-out;
-  -moz-transition: opacity .2s ease-in-out;
-  -webkit-transition: opacity .2s ease-in-out;
-}
-
-.fade {
-  transition: opacity .2s ease-in-out;
-  -moz-transition: opacity .2s ease-in-out;
-  -webkit-transition: opacity .2s ease-in-out;
-}
-
-span.highlight {
-  background-color: #ffffd0;
-}
-
-// Settled on moving the import of syntax highlighting to the bottom of the CSS
-// ... Otherwise it really bloats up the top of the CSS file and makes it difficult to find the start
-//@import "highlights";
-//@import "svg-icons";
+.credit a { font-size: 13px; }
