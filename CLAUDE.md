@@ -37,8 +37,10 @@ Source of truth for content is Kaiwen's **2026 resume**:
   Waymo, plus past time at a Humanoid stealth company, Amazon Robotics, and XPENG US.
 - **Profile photo** is real (`images/profile.jpg`), rendered at `width:80%` centered.
 - **Links row** under the bio: Email (`mailto:kaiwen2@illinois.edu`) / Google Scholar
-  (`user=pwvOhvUAAAAJ`) / CV (`pdfs/cv.pdf`) / LinkedIn (`kaiwen-hong-524520141`).
-  All real and verified from the resume.
+  (`user=pwvOhvUAAAAJ`) / LinkedIn (`kaiwen-hong-524520141`). All real and verified.
+  The CV link + `pdfs/cv.pdf` were **removed 2026-07** at Kaiwen's request (resume now
+  lives only in Overleaf / `~/Desktop/interview/resume/`); re-add the chip in
+  `_layouts/default.html` if he wants it back.
 - **11 publications** in `_publications/` — a Jekyll **collection** with `output: false`
   (they are list data for the homepage, not standalone pages; see "Why a collection"
   below). Each has a real media thumbnail, full author list (Kaiwen's name bolded),
@@ -214,7 +216,7 @@ _layouts/default.html   # THE whole page: bio, links row, Publications loop + to
 _publications/*.markdown # one paper per file; a collection (output:false) — list data only
 tn/images/              # the thumbnails the site actually renders (src = /tn/images/<name>)
 images/                 # only profile.jpg + favicon.ico (full-size figures not needed)
-pdfs/cv.pdf             # the CV the bio links to (copy of Kaiwen_resume_2026.pdf)
+pdfs/                   # empty — cv.pdf was removed 2026-07 (no CV link on the site now)
 style.scss + _sass/     # ALL the styling for the modern-cards theme (rewritten 2026-07)
 Gemfile                 # jekyll 4.3 — used by BOTH local serve and the Actions build
                         #   (committed; Gemfile.lock stays gitignored)
